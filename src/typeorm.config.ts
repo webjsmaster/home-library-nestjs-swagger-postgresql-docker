@@ -1,9 +1,9 @@
-import * as dotenv from 'dotenv'
-import { TypeOrmModuleOptions } from '@nestjs/typeorm'
-import { DataSourceOptions, FileLogger } from 'typeorm'
-import { AlbumEntity, ArtistEntity, TrackEntity, UserEntity } from './api'
+import * as dotenv from "dotenv";
+import { TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { DataSourceOptions, FileLogger } from "typeorm";
+import { AlbumEntity, ArtistEntity, FavoritesEntity, TrackEntity, UserEntity } from "./api";
 
-dotenv.config()
+dotenv.config();
 
 export const options = {
   type: process.env.TYPEORM_CONNECTION as string,
@@ -15,8 +15,8 @@ export const options = {
   migrationsRun: true,
   synchronize: false,
   logging: true,
-  logger: new FileLogger(true, { logPath: './logs/ormlogs.log' }),
-}
+  logger: new FileLogger(true, { logPath: "./logs/ormlogs.log" })
+};
 
 export const dataSourceConfig = {
   ...options,
@@ -25,14 +25,14 @@ export const dataSourceConfig = {
     ArtistEntity,
     AlbumEntity,
     TrackEntity,
-    // FavoritesEntity,
+    FavoritesEntity
   ],
-  migrations: ['src/migrations/*.{ts,js}'],
-} as DataSourceOptions
+  migrations: ["src/migrations/*.{ts,js}"]
+} as DataSourceOptions;
 
 export const typeOrmConfig = {
   ...options,
-  entities: [__dirname + '/**/**/*.entity.{ts,js}'],
-  migrations: [__dirname + './migrations/*.{ts,js}'],
-  retryAttempts: 10,
-} as TypeOrmModuleOptions
+  entities: [__dirname + "/**/**/*.entity.{ts,js}"],
+  migrations: [__dirname + "./migrations/*.{ts,js}"],
+  retryAttempts: 10
+} as TypeOrmModuleOptions;
